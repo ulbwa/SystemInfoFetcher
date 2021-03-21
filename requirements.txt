@@ -1,0 +1,4 @@
+colorama
+psutil
+requests
+speedtest-cli
