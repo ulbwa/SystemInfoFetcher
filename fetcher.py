@@ -100,7 +100,10 @@ class Fetcher:
                 i, j = a.split(': ', maxsplit=1)
                 self.info[i] = j[:-1]
 
-                put_to_dict(self.info, 'IP', get('https://ifconfig.me/ip').text) if i == 'Kernel' else str()
+                try:
+                    put_to_dict(self.info, 'IP', get('https://ifconfig.me/ip').text) if i == 'Kernel' else str()
+                except Exception:
+                    pass
                 put_to_dict(self.info, 'Boot', time.ctime(psutil.boot_time())
                             ) if i == 'Uptime' and 'ANDROID_DATA' not in environ else str()
                 put_to_dict(self.info, 'CPU Architecture', platform.uname().machine.replace(
