@@ -159,7 +159,9 @@ class Fetcher:
         header_template, separator_template, body_template = template.splitlines()[:3]
 
         header = header_template.format(user=self.header['user'], hostname=self.header['hostname'])
-        separator = int(len(header) / len(separator_template)) * separator_template
+        separator = int(
+            len('{}@{}'.format(self.header['user'], self.header['hostname'])
+                ) / len(separator_template)) * separator_template
         body = "\n".join(
             [(body_template.format(
                 key=a, value=self.info[a]
